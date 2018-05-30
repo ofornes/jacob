@@ -5,7 +5,6 @@
 	<groupId>de.compeople</groupId>
 	<artifactId>jacob</artifactId>
 	<version>1.18-SNAPSHOT</version>
-
 	<properties>
 		<project.build.sourceEncoding>ASCII</project.build.sourceEncoding>
 		<project.java.version.source>1.7</project.java.version.source>
@@ -19,19 +18,48 @@
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
 
+	<profiles>
+		<profile>
+			<id>deploy-dlls</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-jar-plugin</artifactId>
+						<version>3.1.0</version>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+								<configuration>
+									<classifier>native</classifier>
+									<includes>
+										<include>dll/**</include>
+									</includes>
+									<excludes>**.java</excludes>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 	<build>
-		<sourceDirectory>samples</sourceDirectory>
-		<testSourceDirectory>unittest</testSourceDirectory>
+		<sourceDirectory>src</sourceDirectory>
+		<testSourceDirectory>unittest</testSourceDirectory> 
 		<resources>
-			<resource>
+			  <resource>
 				<directory>samples</directory>
 				<excludes>
 					<exclude>**/*.java</exclude>
 				</excludes>
-			</resource>
+			</resource> 
 		</resources>
 		<testResources>
 			<testResource>
@@ -46,11 +74,10 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.7.0</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>${project.java.version.source}</source>
+					<target>${project.java.version.target}</target>
 				</configuration>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
@@ -58,6 +85,19 @@
 				<configuration>
 					<skipTests>true</skipTests>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.0.1</version> 
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
