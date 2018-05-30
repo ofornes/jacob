@@ -20,36 +20,6 @@
 		</dependency>
 	</dependencies>
 
-	<profiles>
-		<profile>
-			<id>deploy-dlls</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-jar-plugin</artifactId>
-						<version>3.1.0</version>
-						<executions>
-							<execution>
-								<phase>package</phase>
-								<goals>
-									<goal>jar</goal>
-								</goals>
-								<configuration>
-									<classifier>native</classifier>
-									<includes>
-										<include>dll/**</include>
-									</includes>
-									<excludes>**.java</excludes>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
-
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
@@ -61,7 +31,7 @@
 					<target>${project.java.version.target}</target>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
@@ -77,4 +47,17 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<distributionManagement>
+		<repository>
+			<id>${repository.releases.id}</id>
+			<name>Jacob Releases</name>
+			<url>${repository.releases.url}</url>
+		</repository>
+		<snapshotRepository>
+			<id>${repository.snapshots.id}</id>
+			<name>Jacob Snapshots</name>
+			<url>${repository.snapshots.url}</url>
+		</snapshotRepository>
+	</distributionManagement>
 </project>
