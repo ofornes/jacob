@@ -1,0 +1,37 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>de.compeople</groupId>
+	<artifactId>jacob_native</artifactId>
+	<version>1.18-SNAPSHOT</version>
+	<properties>
+		<project.build.sourceEncoding>UTF-16</project.build.sourceEncoding>
+		<project.java.version.source>1.7</project.java.version.source>
+		<project.java.version.target>1.7</project.java.version.target>
+	</properties>
+
+	<build>
+		<sourceDirectory>.</sourceDirectory>
+		<resources>
+			<resource>
+			<directory>.</directory>
+				<includes>
+					<include>**.dll</include>
+				</includes>
+			</resource>
+		</resources>
+	</build>
+	<distributionManagement>
+		<repository>
+			<id>${repository.releases.id}</id>
+			<name>Jacob Releases</name>
+			<url>${repository.releases.url}</url>
+		</repository>
+		<snapshotRepository>
+			<id>${repository.snapshots.id}</id>
+			<name>Jacob Snapshots</name>
+			<url>${repository.snapshots.url}</url>
+		</snapshotRepository>
+	</distributionManagement>
+</project>
