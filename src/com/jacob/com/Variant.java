@@ -109,7 +109,7 @@ public class Variant extends JacobObject {
 
 	// VT_I1 = 16
 
-	/** variant's type is byte VT_UI1 */
+	/** variant's type is byte VT_UI1 This is an UNSIGNED byte */
 	public static final short VariantByte = 17;
 
 	// VT_UI2 = 18
@@ -161,7 +161,7 @@ public class Variant extends JacobObject {
 	/**
 	 * Pointer to MS struct.
 	 */
-	int m_pVariant = 0;
+	long m_pVariant = 0;
 
 	/**
 	 * public constructor, initializes and sets type to VariantEmpty
@@ -795,13 +795,17 @@ public class Variant extends JacobObject {
 
 	/**
 	 * 
-	 * @return string contents of the variant.
+	 * @return string contents of the variant, null if is of type null or empty
 	 * @throws IllegalStateException
 	 *             if this variant is not of type String
 	 */
 	public String getString() {
 		if (getvt() == Variant.VariantString) {
 			return getVariantString();
+		} else if (getvt() == Variant.VariantEmpty) {
+			return null;
+		} else if (getvt() == Variant.VariantNull) {
+			return null;
 		} else {
 			throw new IllegalStateException(
 					"getString() only legal on Variants of type VariantString, not "
@@ -842,7 +846,7 @@ public class Variant extends JacobObject {
 				JacobObject.debug("About to call getVariantVariant()");
 			}
 			Variant enclosedVariant = new Variant();
-			int enclosedVariantMemory = getVariantVariant();
+			long enclosedVariantMemory = getVariantVariant();
 			enclosedVariant.m_pVariant = enclosedVariantMemory;
 			Object enclosedVariantAsJava = enclosedVariant.toJavaObject();
 			// zero out the reference to the underlying windows memory so that
@@ -1016,7 +1020,7 @@ public class Variant extends JacobObject {
 	 * 
 	 * @return Variant one of the VT_Variant types
 	 */
-	private native int getVariantVariant();
+	private native long getVariantVariant();
 
 	/**
 	 * Reports the type of the underlying Variant object
@@ -2157,6 +2161,8 @@ public class Variant extends JacobObject {
 	 * <li>"null" if VariantEmpty,
 	 * <li>"null" if VariantError
 	 * <li>"null" if VariantNull
+	 * <li>"null" if Variant type didn't convert. This can happen for date
+	 * conversions where the returned value was 0.
 	 * <li>the value if we know how to describe one of that type
 	 * <li>three question marks if can't convert
 	 * 
@@ -2182,7 +2188,11 @@ public class Variant extends JacobObject {
 		try {
 			Object foo = toJavaObject();
 			// rely on java objects to do the right thing
-			return foo.toString();
+			if (foo == null) {
+				return "null";
+			} else {
+				return foo.toString();
+			}
 		} catch (NotImplementedException nie) {
 			// some types do not generate a good description yet
 			return "Description not available for type: " + getvt();
