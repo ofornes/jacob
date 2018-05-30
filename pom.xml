@@ -7,8 +7,8 @@
 	<version>1.18-SNAPSHOT</version>
 	<properties>
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
-		<project.java.version.source>1.7</project.java.version.source>
-		<project.java.version.target>1.7</project.java.version.target>
+		<project.java.version.source>1.8</project.java.version.source>
+		<project.java.version.target>1.8</project.java.version.target>
 	</properties>
 
 	<dependencies>
