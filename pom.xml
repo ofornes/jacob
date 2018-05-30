@@ -6,7 +6,7 @@
 	<artifactId>jacob</artifactId>
 	<version>1.18-SNAPSHOT</version>
 	<properties>
-		<project.build.sourceEncoding>ASCII</project.build.sourceEncoding>
+		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<project.java.version.source>1.7</project.java.version.source>
 		<project.java.version.target>1.7</project.java.version.target>
 	</properties>
@@ -52,23 +52,14 @@
 
 	<build>
 		<sourceDirectory>src</sourceDirectory>
-		<testSourceDirectory>unittest</testSourceDirectory> 
 		<resources>
-			  <resource>
+			<resource>
 				<directory>samples</directory>
 				<excludes>
 					<exclude>**/*.java</exclude>
 				</excludes>
-			</resource> 
+			</resource>
 		</resources>
-		<testResources>
-			<testResource>
-				<directory>unittest</directory>
-				<excludes>
-					<exclude>**/*.java</exclude>
-				</excludes>
-			</testResource>
-		</testResources>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -78,18 +69,11 @@
 					<target>${project.java.version.target}</target>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.21.0</version>
-				<configuration>
-					<skipTests>true</skipTests>
-				</configuration>
-			</plugin>
+			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>3.0.1</version> 
+				<version>3.0.1</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
