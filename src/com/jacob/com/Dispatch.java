@@ -262,8 +262,12 @@ public class Dispatch extends JacobObject {
 	 * 
 	 * @return true if there is an underlying windows dispatch object
 	 */
-	public boolean isAttached() {
-		 return m_pDispatch != NOT_ATTACHED;
+	protected boolean isAttached() {
+		if (m_pDispatch == NOT_ATTACHED) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	/**
