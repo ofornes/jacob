@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.compeople</groupId>
 	<artifactId>jacob_native</artifactId>
-	<version>1.18-SNAPSHOT</version>
+	<version>1.19</version>
 	<properties>
 		<project.build.sourceEncoding>UTF-16</project.build.sourceEncoding>
 		<project.java.version.source>1.7</project.java.version.source>
