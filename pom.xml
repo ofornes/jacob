@@ -35,9 +35,9 @@
 	</developers>
 
 	<scm>
-		<connection>scm:git:https://github.com/ofornes/jacob.git</connection>
-		<developerConnection>scm:git:ssh://github.com:ofornes/jacob.git</developerConnection>
-		<url>https://github.com/ofornes/jacob/tree/master/</url>
+		<url>https://github.com/ofornes/jacob/</url>
+		<connection>scm:git:git://github.com/ofornes/jacob.git</connection>
+		<developerConnection>scm:git:git@github.com:ofornes/jacob.git</developerConnection>
 	</scm>
 
 	<properties>
