@@ -9,7 +9,7 @@
 
 	<groupId>cat.albirar</groupId>
 	<artifactId>jacob</artifactId>
-	<version>1.20-SNAPSHOT</version>
+	<version>1.19-SNAPSHOT</version>
 	<name>Java COM Bridge</name>
 	<description>JACOB is a JAVA-COM Bridge that allows you to call COM Automation components from Java. It uses JNI to make native calls to the COM libraries. JACOB runs on x86 and x64 environments supporting 32 bit and 64 bit JVMs</description>
 
