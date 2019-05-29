@@ -1,15 +1,50 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>9</version>
+	</parent>
+
 	<groupId>cat.albirar</groupId>
 	<artifactId>jacob</artifactId>
 	<version>1.19</version>
+	<name>Java COM Bridge</name>
+	<description>JACOB is a JAVA-COM Bridge that allows you to call COM Automation components from Java. It uses JNI to make native calls to the COM libraries. JACOB runs on x86 and x64 environments supporting 32 bit and 64 bit JVMs</description>
+
+	<licenses>
+		<license>
+			<name>LGPLv2</name>
+			<comments>GNU Library General Public License, version 2.0</comments>
+			<url>https://www.gnu.org/licenses/old-licenses/lgpl-2.0.html</url>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>Joe Freeman</name>
+		</developer>
+		<developer>
+			<name>clay_shooter</name>
+		</developer>
+		<developer>
+			<name>Octavi Fornés</name>
+			<email>octavi@fornes.cat</email>
+		</developer>
+	</developers>
+
+	<scm>
+		<connection>scm:git:https://github.com/ofornes/jacob.git</connection>
+		<developerConnection>scm:git:ssh://github.com:ofornes/jacob.git</developerConnection>
+		<url>https://github.com/ofornes/jacob/tree/master/</url>
+	</scm>
+
 	<properties>
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<project.java.version.source>1.8</project.java.version.source>
 		<project.java.version.target>1.8</project.java.version.target>
-		
+
 		<maven.test.skip>true</maven.test.skip>
 
 		<timestamp>${maven.build.timestamp}</timestamp>
@@ -66,19 +101,40 @@
 					</execution>
 				</executions>
 			</plugin>
+
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.6</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+						<configuration>
+							<keyname>${gpg.keyname}</keyname>
+							<passphraseServerId>${gpg.passphrase}</passphraseServerId>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 	</build>
 
 	<distributionManagement>
 		<repository>
-			<id>${repository.releases.id}</id>
+			<id>sonatype-release</id>
 			<name>Jacob Releases</name>
-			<url>${repository.releases.url}</url>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
 		</repository>
 		<snapshotRepository>
-			<id>${repository.snapshots.id}</id>
+			<id>sonatype-snapshots</id>
 			<name>Jacob Snapshots</name>
-			<url>${repository.snapshots.url}</url>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
 </project>
